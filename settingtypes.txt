@@ -1,0 +1,4 @@
+# when true, x_bows items will be aliased to y_bows items.
+y_bows:alias_x_bows (alias x_bows items) bool true
+
+y_bows:arrows_per_craft (arrows per craft) int 4 1 65535
