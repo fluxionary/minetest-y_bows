@@ -4,44 +4,50 @@ local s = y_bows.settings
 
 y_bows.util = {}
 
-function y_bows.util.register_craft_if_valid(name, recipe)
-	local recipe_is_valid = true
+local function recipe_is_valid(recipe)
 	if type(recipe) == "table" and #recipe > 0 and type(recipe[1]) == "table" and #recipe[1] > 0 then
 		local width = #recipe[1]
 		for i = 1, #recipe do
 			local row = recipe[i]
 			if #row ~= width then
-				recipe_is_valid = false
-				break
+				return false
 			end
 			for j = 1, #row do
 				if type(row[j]) ~= "string" then
-					recipe_is_valid = false
-					break
+					return false
 				else
 					local mod, item = row[j]:split(":")
 					if mod == "group" and #futil.get_items_with_group(item) == 0 then
-						recipe_is_valid = false
-						break
+						return false
 					elseif not minetest.registered_items[row[j]] then
-						recipe_is_valid = false
-						break
+						return false
 					end
 				end
 			end
-			if not recipe_is_valid then
-				break
-			end
 		end
 	else
-		recipe_is_valid = false
+		return false
 	end
 
-	if recipe_is_valid then
-		craftsystem.register_craft({
+	return true
+end
+
+function y_bows.util.register_craft_if_valid(name, recipe)
+	if recipe_is_valid(recipe) then
+		craftsystem.api.register_craft({
 			output = f("%s %s", name, s.arrows_per_craft),
 			type = "shaped",
 			recipe = recipe,
 		})
+	end
+end
+
+function y_bows.util.find_in_inv(player, group)
+	local inv = player:get_inventory()
+	for i = 1, inv:get_size("main") do
+		local stack = inv:get_stack("main", i)
+		if minetest.get_item_group(stack:get_name(), group) > 0 then
+			return i, stack
+		end
 	end
 end

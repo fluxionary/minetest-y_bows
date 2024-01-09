@@ -1,10 +1,7 @@
-ballistics.register_projectile("y_bows:arrow", {
-	is_arrow = true,
-	visual = "mesh",
-	mesh = "y_bows_arrow.b3d",
-	textures = { "y_bows_arrow_mesh.png" },
+ballistics.register_projectile("y_bows:slingshot_ammo", {
+	visual = "sprite",
+	textures = { "y_bows_ball_rock.png" },
 	collisionbox = { -0.2, -0.2, -0.2, 0.2, 0.2, 0.2 },
-	selectionbox = { -0.05, -0.05, -0.2, 0.05, 0.05, 0.2, rotate = true },
 	immortal = true,
 
 	parameters = {

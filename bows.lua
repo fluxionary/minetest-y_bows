@@ -1,29 +1,32 @@
+local f = string.format
+
 local S = y_bows.S
 local ci = y_bows.resources.craftitems
 
-local function find_arrow_in_inv(user)
-	local inv = user:get_inventory()
-	for i = 1, inv:get_size("main") do
-		local stack = inv:get_stack("main", i)
-		if minetest.get_item_group(stack:get_name(), "y_bows_arrow") > 0 then
-			return i, stack
-		end
-	end
-end
-
 function y_bows.register_bow(name, def)
 	minetest.register_tool(name, {
-		description = def.description,
+		description = f(
+			"%s\n%s\n%s\n%s",
+			def.description,
+			minetest.colorize("green", S("crit chance: @1%", def.crit_chance)),
+			minetest.colorize("cyan", S("base speed: @1", def.base_speed)),
+			minetest.colorize("red", S("draw time: @1", def.draw_time))
+		),
+		short_description = def.description,
 		inventory_image = def.inventory_image,
-		groups = { y_bows_bow = 1, y_bows_tool = 1 },
+		groups = { y_bows_bow = 1, y_bows_weapon = 1 },
 		_y_bows_crit_chance = def.crit_chance,
-		_y_bows_speed_base = def.speed_base,
+		_y_bows_base_speed = def.base_speed,
 		_y_bows_draw_time = def.draw_time,
+		_y_bows_projectile_group = "y_bows_arrow",
 		on_use = function(itemstack, user, pointed_thing)
 			if not minetest.is_player(user) then
 				return
 			end
-			local i, arrows = find_arrow_in_inv(user)
+			local i, arrows = y_bows.util.find_in_inv(user, "y_bows_arrow")
+			if not (i and arrows) then
+				return
+			end
 			if not y_bows.shoot("y_bows:arrow", user, itemstack, arrows:peek_item()) then
 				-- shooting failed for some reason, don't do anything
 				return
@@ -46,7 +49,7 @@ y_bows.register_bow("y_bows:bow_wood", {
 	inventory_image = "y_bows_bow_wood.png",
 	uses = 185,
 	crit_chance = 2,
-	speed_base = 30 * 0.8,
+	base_speed = 30 * 0.8,
 	draw_time = 1,
 	recipe = {
 		{ ci.stick, ci.stick, ci.string },
@@ -60,7 +63,7 @@ y_bows.register_bow("y_bows:bow_steel", {
 	inventory_image = "y_bows_bow_steel.png",
 	uses = 285,
 	crit_chance = 5,
-	speed_base = 30 * 1.2,
+	base_speed = 30 * 1.2,
 	draw_time = 2,
 	recipe = {
 		{ ci.steel, ci.steel, ci.steel_wire },
