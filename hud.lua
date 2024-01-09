@@ -11,7 +11,7 @@ minetest.register_chatcommand("y_bows:hud", {
 		if not player then
 			return false, "you must be logged in"
 		end
-		if y_bows.hud:toggle_enabled() then
+		if y_bows.hud:toggle_enabled(player) then
 			return true, "y_bows drawing hud enabled"
 		else
 			return true, "y_bows drawing hud disabled"
