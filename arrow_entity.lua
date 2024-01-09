@@ -49,24 +49,49 @@ ballistics.register_projectile("y_bows:arrow", {
 		},
 	},
 
-	on_activate = ballistics.on_activate_sound_play,
-	on_deactivate = ballistics.on_deactivate_sound_stop,
-	on_step = ballistics.on_step_particles,
+	on_activate = function(self, ...)
+		if self._parameters.active_sound then
+			ballistics.on_activate_sound_play(self, ...)
+		end
+	end,
+	on_deactivate = function(self, ...)
+		if self._parameters.active_sound then
+			ballistics.on_deactivate_active_sound_stop(self, ...)
+		end
+	end,
+	on_step = function(self, ...)
+		if self._parameters.drag then
+			ballistics.on_step_apply_drag(self, ...)
+		end
+		if self._parameters.particles then
+			ballistics.on_step_particles(self, ...)
+		end
+	end,
 
 	on_hit_node = function(self, pos, node, axis, old_velocity, new_velocity)
 		ballistics.on_hit_node_freeze(self, pos, node, axis, old_velocity, new_velocity)
-		ballistics.on_hit_node_active_sound_stop(self, pos, node, axis, old_velocity, new_velocity)
-		ballistics.on_hit_node_hit_sound_play(self, pos, node, axis, old_velocity, new_velocity)
+		if self._parameters.active_sound then
+			ballistics.on_hit_node_active_sound_stop(self, pos, node, axis, old_velocity, new_velocity)
+		end
+		if self._parameters.hit_sound then
+			ballistics.on_hit_node_hit_sound_play(self, pos, node, axis, old_velocity, new_velocity)
+		end
 
 		return true
 	end,
 
 	on_hit_object = function(self, object, axis, old_velocity, new_velocity)
-		ballistics.on_hit_object_active_sound_stop(self)
-		ballistics.on_hit_object_hit_sound_play(self, object, axis, old_velocity, new_velocity)
-		-- TODO check that punch is defined
-		ballistics.on_hit_object_punch(self, object, axis, old_velocity, new_velocity)
+		if self._parameters.active_sound then
+			ballistics.on_hit_object_active_sound_stop(self)
+		end
+		if self._parameters.hit_sound then
+			ballistics.on_hit_object_hit_sound_play(self, object, axis, old_velocity, new_velocity)
+		end
+		if self._parameters.punch then
+			ballistics.on_hit_object_punch(self, object, axis, old_velocity, new_velocity)
+		end
 
+		-- TODO: when i get the "attach to entity" thing working, do that here
 		self.object:remove()
 
 		return true

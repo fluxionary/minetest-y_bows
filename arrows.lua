@@ -24,6 +24,9 @@ y_bows.register_arrow("y_bows:arrow_bronze", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.1,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fleshy = 12 },
@@ -41,6 +44,9 @@ y_bows.register_arrow("y_bows:arrow_diamond", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.15,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fleshy = 16 },
@@ -58,6 +64,9 @@ y_bows.register_arrow("y_bows:arrow_fire", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.2,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fire = 6 },
@@ -77,6 +86,9 @@ y_bows.register_arrow("y_bows:arrow_mese", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.15,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fleshy = 14 },
@@ -94,6 +106,9 @@ y_bows.register_arrow("y_bows:arrow_steel", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.15,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fleshy = 12 },
@@ -111,6 +126,9 @@ y_bows.register_arrow("y_bows:arrow_stone", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.15,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fleshy = 8 },
@@ -128,6 +146,9 @@ y_bows.register_arrow("y_bows:arrow_wood", {
 		{ "", "", ci.feather },
 	},
 	parameters = {
+		drag = {
+			coefficient = 0.2,
+		},
 		punch = {
 			tool_capabilities = {
 				damage_groups = { fleshy = 4 },
