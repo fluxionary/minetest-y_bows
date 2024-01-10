@@ -62,6 +62,7 @@ local base_def = {
 		ballistics.on_hit_node_freeze(self, pos, node, axis, old_velocity, new_velocity)
 		ballistics.on_hit_node_active_sound_stop(self, pos, node, axis, old_velocity, new_velocity)
 		ballistics.on_hit_node_hit_sound_play(self, pos, node, axis, old_velocity, new_velocity)
+		ballistics.on_hit_node_become_non_physical(self, pos, node, axis, old_velocity, new_velocity)
 
 		if self._parameters.replace then
 			ballistics.on_hit_node_replace(self, pos, node, axis, old_velocity, new_velocity)
@@ -102,6 +103,8 @@ local base_def = {
 		if minetest.is_player(source) and not hit_a_projectile then
 			minetest.sound_play({ name = "y_bows_arrow_successful_hit" }, { to_player = source:get_player_name() })
 		end
+
+		ballistics.on_hit_object_become_non_physical(self, object, axis, old_velocity, new_velocity)
 
 		if self._parameters.remove_object then
 			self.object:remove()
