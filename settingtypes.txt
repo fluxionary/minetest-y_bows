@@ -2,3 +2,6 @@
 y_bows:alias_x_bows (alias x_bows items) bool true
 
 y_bows:arrows_per_craft (arrows per craft) int 4 1 65535
+
+# different bows will scale this differently to increase or decrease distance and punch power.
+y_bows:base_speed (base projectile speed) float 30 0.1

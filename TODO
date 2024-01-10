@@ -1,6 +1,8 @@
 * [ ] fix drag values for arrows (x_bows does some weird math with the full_punch_interval...)
-* [ ] damage isn't right (doesn't seem to depend on arrow, seems to be higher for things that're farther away?)
-* [ ] slingshot
+* [x] damage isn't right (doesn't seem to depend on arrow, seems to be higher for things that're farther away?)
+ * i think this was mostly that i had crit wrong
+* [x] slingshot
 * [x] fire arrow isn't working right
-* [ ] need to scale damage to some absolute speed and not the arrow's starting speed, to make the wooden things weaker
-* [ ] if arrow type is changed, force drawing bow again
+* [x] need to scale damage to some absolute speed and not the arrow's starting speed, to make the wooden things weaker
+* [x] if arrow type is changed, force drawing bow again
+* [ ] need to ding if you hit the bullseye of the target
