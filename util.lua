@@ -16,10 +16,13 @@ local function recipe_is_valid(recipe)
 				if type(row[j]) ~= "string" then
 					return false
 				else
-					local mod, item = row[j]:split(":")
-					if mod == "group" and #futil.get_items_with_group(item) == 0 then
-						return false
-					elseif not minetest.registered_items[row[j]] then
+					local itemstring = row[j]
+					local mod, item = unpack(itemstring:split(":"))
+					if mod == "group" then
+						if #futil.get_items_with_group(item) == 0 then
+							return false
+						end
+					elseif not minetest.registered_items[itemstring] then
 						return false
 					end
 				end

@@ -175,7 +175,7 @@ for i = 1, #default_dyes do
 	y_bows.register_arrow("y_bows:arrow_training_" .. dye, {
 		description = S(dye .. " training arrow"),
 		inventory_image = "y_bows_arrow_wood.png^[colorize:" .. dye .. ":100",
-		recipe = diagonal("group:color_" .. dye, ci.stick, ci.feather),
+		recipe = diagonal("dye:" .. dye, ci.stick, ci.feather),
 		properties = {
 			--colors = {dye},  -- this doesn't work for unknown reasons
 			textures = { f("y_bows_arrow_mesh.png^[colorize:%s:128", dye) },

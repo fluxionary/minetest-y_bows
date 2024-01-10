@@ -9,7 +9,7 @@ end
 
 if y_bows.has.default then
 	craftitems.bronze = "default:bronze_ingot"
-	craftitems.cobble = "group:cobble"
+	craftitems.cobble = "default:cobble"
 	craftitems.diamond = "default:diamond"
 	craftitems.flint = "default:flint"
 	craftitems.mese_crystal = "default:mese_crystal"
