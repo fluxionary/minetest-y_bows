@@ -6,3 +6,5 @@
 * [x] need to scale damage to some absolute speed and not the arrow's starting speed, to make the wooden things weaker
 * [x] if arrow type is changed, force drawing bow again
 * [ ] need to ding if you hit the bullseye of the target
+* [ ] color the arrow somehow (particularly for the dyed ones)
+* [ ] address TODOs in files
