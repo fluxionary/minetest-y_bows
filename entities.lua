@@ -1,7 +1,6 @@
-ballistics.register_projectile("y_bows:slingshot_ammo", {
-	visual = "sprite",
-	textures = { "y_bows_ball_rock.png" },
-	collisionbox = { -0.2, -0.2, -0.2, 0.2, 0.2, 0.2 },
+local registered_projectiles = {}
+
+local base_def = {
 	immortal = true,
 
 	parameters = {
@@ -45,35 +44,33 @@ ballistics.register_projectile("y_bows:slingshot_ammo", {
 	},
 
 	on_activate = function(self, ...)
-		if self._parameters.active_sound then
-			ballistics.on_activate_active_sound_play(self, ...)
-		end
+		ballistics.on_activate_active_sound_play(self, ...)
 	end,
+
 	on_deactivate = function(self, ...)
-		if self._parameters.active_sound then
-			ballistics.on_deactivate_active_sound_stop(self, ...)
-		end
+		ballistics.on_deactivate_active_sound_stop(self, ...)
 	end,
+
 	on_step = function(self, ...)
+		ballistics.on_step_particles(self, ...)
 		if self._parameters.drag then
 			ballistics.on_step_apply_drag(self, ...)
-		end
-		if self._parameters.particles then
-			ballistics.on_step_particles(self, ...)
 		end
 	end,
 
 	on_hit_node = function(self, pos, node, axis, old_velocity, new_velocity)
 		ballistics.on_hit_node_freeze(self, pos, node, axis, old_velocity, new_velocity)
-		if self._parameters.active_sound then
-			ballistics.on_hit_node_active_sound_stop(self, pos, node, axis, old_velocity, new_velocity)
-		end
-		if self._parameters.hit_sound then
-			ballistics.on_hit_node_hit_sound_play(self, pos, node, axis, old_velocity, new_velocity)
-		end
+		ballistics.on_hit_node_active_sound_stop(self, pos, node, axis, old_velocity, new_velocity)
+		ballistics.on_hit_node_hit_sound_play(self, pos, node, axis, old_velocity, new_velocity)
+
 		if self._parameters.replace then
 			ballistics.on_hit_node_replace(self, pos, node, axis, old_velocity, new_velocity)
 		end
+
+		if y_bows.util.bullseye_was_hit(self, pos, node, axis, old_velocity, new_velocity) then
+			y_bows.on_bullseye_hit(pos, self._source_obj)
+		end
+
 		if self._parameters.remove_object then
 			self.object:remove()
 		end
@@ -82,26 +79,39 @@ ballistics.register_projectile("y_bows:slingshot_ammo", {
 	end,
 
 	on_hit_object = function(self, object, axis, old_velocity, new_velocity)
-		if self._parameters.active_sound then
-			ballistics.on_hit_object_active_sound_stop(self)
+		local hit_a_projectile = false
+		local entity = object:get_luaentity()
+		if entity and registered_projectiles[entity.name] then
+			hit_a_projectile = true
 		end
-		if self._parameters.hit_sound then
+
+		ballistics.on_hit_object_active_sound_stop(self)
+		if not hit_a_projectile then
 			ballistics.on_hit_object_hit_sound_play(self, object, axis, old_velocity, new_velocity)
 		end
+
 		if self._parameters.punch then
 			ballistics.on_hit_object_punch(self, object, axis, old_velocity, new_velocity)
 		end
+
 		if self._parameters.replace then
 			ballistics.on_hit_object_replace(self, object, axis, old_velocity, new_velocity)
 		end
-		if minetest.is_player(self._source_obj) then
-			minetest.sound_play(
-				{ name = "y_bows_arrow_successful_hit" },
-				{ to_player = self._source_obj:get_player_name() }
-			)
+
+		local source = self._source_obj
+		if minetest.is_player(source) and not hit_a_projectile then
+			minetest.sound_play({ name = "y_bows_arrow_successful_hit" }, { to_player = source:get_player_name() })
 		end
+
 		if self._parameters.remove_object then
 			self.object:remove()
+		elseif hit_a_projectile then
+			if self._parameters.drop_item then
+				ballistics.on_hit_object_drop_item(self)
+			end
+			if entity._parameters.drop_item then
+				ballistics.on_hit_object_drop_item(entity)
+			end
 		end
 
 		-- TODO: when i get the "attach to entity" thing working, do that here
@@ -118,4 +128,27 @@ ballistics.register_projectile("y_bows:slingshot_ammo", {
 		end
 		ballistics.on_punch_deflect(self, puncher, time_from_last_punch, tool_capabilities, dir, damage)
 	end,
+}
+
+function y_bows.register_projectile(name, overrides)
+	local def = table.copy(base_def)
+	futil.table.set_all(def, overrides)
+	ballistics.register_projectile(name, def)
+	registered_projectiles[name] = true
+end
+
+y_bows.register_projectile("y_bows:arrow", {
+	is_arrow = true,
+	visual = "mesh",
+	mesh = "y_bows_arrow.b3d",
+	textures = { "y_bows_arrow_mesh.png" },
+	collisionbox = { -0.05, -0.05, -0.05, 0.05, 0.05, 0.05 },
+	selectionbox = { -0.05, -0.05, -0.2, 0.05, 0.05, 0.2, rotate = true },
+})
+
+y_bows.register_projectile("y_bows:slingshot_ammo", {
+	visual = "sprite",
+	textures = { "y_bows_ball_rock.png" },
+	collisionbox = { -0.05, -0.05, -0.05, 0.05, 0.05, 0.05 },
+	visual_size = vector.new(0.2, 0.2, 0.2),
 })

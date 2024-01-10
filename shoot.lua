@@ -15,7 +15,7 @@ function y_bows.shoot(entity_name, shooter, weapon, projectile)
 	local drawing_elapsed = shooter_meta:get_float("y_bows:drawing_elapsed")
 	local speed = base_speed * math.min(drawing_elapsed, draw_time) / draw_time
 	local projectile_def = projectile:get_definition()
-	local parameters = table.copy(projectile_def._ybows_parameters)
+	local parameters = table.copy(projectile_def._y_bows_parameters)
 	local crit
 	if parameters.punch then
 		parameters.punch.scale_speed = s.base_speed
@@ -31,7 +31,8 @@ function y_bows.shoot(entity_name, shooter, weapon, projectile)
 		end
 	end
 	shooter_meta:set_string("y_bows:drawing_elapsed", "")
-	local obj = ballistics.player_shoots(entity_name, shooter, speed, nil, parameters)
+	local obj =
+		ballistics.player_shoots(entity_name, shooter, speed, nil, parameters, projectile_def._y_bows_properties)
 	if obj then
 		if crit then
 			minetest.sound_play({ name = "y_bows_bow_shoot_crit" }, { pos = obj:get_pos() }, true)

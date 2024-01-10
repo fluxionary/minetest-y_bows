@@ -9,3 +9,8 @@ minetest.override_item("y_bows:target", {
 		return false
 	end,
 })
+
+y_bows.register_on_bullseye_hit(function(pos, player)
+	mesecon.receptor_on(pos)
+	minetest.get_node_timer(pos):start(2)
+end)

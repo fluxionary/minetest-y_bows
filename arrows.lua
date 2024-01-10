@@ -23,7 +23,8 @@ function y_bows.register_arrow(name, def)
 		short_description = def.description,
 		inventory_image = def.inventory_image,
 		groups = { y_bows_arrow = 1 },
-		_ybows_parameters = parameters,
+		_y_bows_parameters = parameters,
+		_y_bows_properties = def.properties,
 	})
 
 	y_bows.util.register_craft_if_valid(name, def.recipe)
@@ -175,5 +176,9 @@ for i = 1, #default_dyes do
 		description = S(dye .. " training arrow"),
 		inventory_image = "y_bows_arrow_wood.png^[colorize:" .. dye .. ":100",
 		recipe = diagonal("group:color_" .. dye, ci.stick, ci.feather),
+		properties = {
+			--colors = {dye},  -- this doesn't work for unknown reasons
+			textures = { f("y_bows_arrow_mesh.png^[colorize:%s:128", dye) },
+		},
 	})
 end

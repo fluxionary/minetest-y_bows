@@ -25,3 +25,19 @@ if ci.target_core and ci.target_face then
 		},
 	})
 end
+
+y_bows.registered_on_target_hits = {}
+
+function y_bows.register_on_bullseye_hit(callback)
+	y_bows.registered_on_target_hits[#y_bows.registered_on_target_hits + 1] = callback
+end
+
+function y_bows.on_bullseye_hit(pos, player)
+	for _, callback in ipairs(y_bows.registered_on_target_hits) do
+		callback(pos, player)
+	end
+end
+
+y_bows.register_on_bullseye_hit(function(pos, player)
+	minetest.sound_play({ name = "y_bows_arrow_successful_hit" }, { to_player = player:get_player_name() })
+end)

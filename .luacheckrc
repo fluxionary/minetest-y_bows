@@ -176,6 +176,11 @@ stds.minetest = {
 				rand_normal_dist = {},
 			},
 		},
+		Raycast = {
+			fields = {
+				next = {},
+			},
+		},
 		SecureRandom = {
 			fields = {
 				next_bytes = {},

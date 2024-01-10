@@ -23,7 +23,8 @@ function y_bows.register_slingshot_ammo(name, def)
 		short_description = def.description,
 		inventory_image = def.inventory_image,
 		groups = { y_bows_slingshot_ammo = 1 },
-		_ybows_parameters = parameters,
+		_y_bows_parameters = parameters,
+		properties = def.properties,
 	})
 
 	y_bows.util.register_craft_if_valid(name, def.recipe)
@@ -39,7 +40,7 @@ y_bows.register_slingshot_ammo("y_bows:ball_rock", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 10 },
+				damage_groups = { fleshy = 5 },
 			},
 		},
 	},
