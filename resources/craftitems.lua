@@ -32,7 +32,7 @@ if y_bows.has.fire then
 	craftitems.fire = "fire:basic_flame"
 end
 
-if y_bows.has.animalia or y_bows.has.mobs_animals or y_bows.has.petz then
+if y_bows.has.animalia or y_bows.has.mobs_animal or y_bows.has.petz then
 	craftitems.feather = "group:feather"
 elseif y_bows.has.wool then
 	craftitems.feather = "group:wool"
