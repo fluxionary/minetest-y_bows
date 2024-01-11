@@ -91,12 +91,12 @@ local base_def = {
 			ballistics.on_hit_object_hit_sound_play(self, object, axis, old_velocity, new_velocity)
 		end
 
-		if self._parameters.punch then
-			ballistics.on_hit_object_punch(self, object, axis, old_velocity, new_velocity)
-		end
-
 		if self._parameters.replace then
 			ballistics.on_hit_object_replace(self, object, axis, old_velocity, new_velocity)
+		end
+
+		if self._parameters.punch then
+			ballistics.on_hit_object_punch(self, object, axis, old_velocity, new_velocity)
 		end
 
 		local source = self._source_obj
