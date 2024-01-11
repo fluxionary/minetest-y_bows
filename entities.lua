@@ -124,7 +124,11 @@ local base_def = {
 	end,
 
 	on_punch = function(self, puncher, time_from_last_punch, tool_capabilities, dir, damage)
-		if self._parameters.drop_item then
+		if self._parameters.pickup_item then
+			if ballistics.on_punch_pickup_item(self, puncher, time_from_last_punch, tool_capabilities, dir, damage) then
+				return
+			end
+		elseif self._parameters.drop_item then
 			if ballistics.on_punch_drop_item(self, puncher, time_from_last_punch, tool_capabilities, dir, damage) then
 				return
 			end
