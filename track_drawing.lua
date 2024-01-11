@@ -42,6 +42,7 @@ minetest.register_globalstep(function(dtime)
 			wield_index == previous_index
 			and wielded_item == previous_item
 			and wielding_bow_weapon
+			and projectile
 			and projectile == previous_projectile
 		then
 			local prev_elapsed = meta:get_float("y_bows:drawing_elapsed")
