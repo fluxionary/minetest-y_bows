@@ -6,6 +6,7 @@ y_bows.dofile("util")
 
 y_bows.dofile("resources", "init")
 
+y_bows.dofile("weapon")
 y_bows.dofile("arrows")
 y_bows.dofile("bows")
 y_bows.dofile("entities")
