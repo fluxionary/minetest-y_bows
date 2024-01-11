@@ -83,8 +83,9 @@ y_bows.register_arrow("y_bows:arrow_fire", {
 				damage_groups = { fire = 6 },
 			},
 		},
-		replace = { replacement = ci.fire },
-		remove_object = true,
+		replace = {
+			replacement = ci.fire,
+		},
 	},
 })
 
