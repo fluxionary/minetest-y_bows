@@ -87,8 +87,15 @@ y_bows.hud_foreground = futil.define_hud("y_bows:foreground", {
 			local _, projectiles = y_bows.util.find_in_inv(player, tool_def._y_bows_projectile_group)
 			if projectiles then
 				local meta = player:get_meta()
-				local elapsed = meta:get_float("y_bows:drawing_elapsed")
+				local elapsed
+				if meta:get_string("y_bows:drawing_name") == wielded_item:get_name() then
+					elapsed = meta:get_float("y_bows:drawing_elapsed")
+				else
+					-- the elapsed time is for something else, set to 0
+					elapsed = 0
+				end
 				local draw_time = tool_def._y_bows_draw_time
+				elapsed = math.min(elapsed, draw_time)
 
 				return {
 					hud_elem_type = "statbar",
