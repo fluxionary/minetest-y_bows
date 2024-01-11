@@ -24,7 +24,7 @@ y_bows.hud_icon = futil.define_hud("y_bows:icon", {
 					scale = { x = 3, y = 3 },
 					position = { x = 0.5, y = 0.5 },
 					alignment = { x = 0, y = 0 },
-					offset = { x = 0, y = 200 },
+					offset = { x = 0, y = -200 },
 				}
 			end
 		end
@@ -35,7 +35,7 @@ y_bows.hud_icon = futil.define_hud("y_bows:icon", {
 			scale = { x = 3, y = 3 },
 			position = { x = 0.5, y = 0.5 },
 			alignment = { x = 0, y = 0 },
-			offset = { x = 0, y = 200 },
+			offset = { x = 0, y = -200 },
 		}
 	end,
 })
@@ -54,7 +54,7 @@ y_bows.hud_background = futil.define_hud("y_bows:background", {
 					text = "[combine:16x16^[noalpha^[colorize:#000000:255",
 					number = 40,
 					direction = 0, -- left to right
-					position = { x = 0.5, y = 0.65 },
+					position = { x = 0.5, y = 0.35 },
 					alignment = { x = 0, y = 0 },
 					offset = { x = -160, y = 0 },
 					size = { x = 16, y = 16 },
@@ -68,7 +68,7 @@ y_bows.hud_background = futil.define_hud("y_bows:background", {
 			text = "[combine:16x16^[noalpha^[colorize:#000000:255",
 			number = 0,
 			direction = 0, -- left to right
-			position = { x = 0.5, y = 0.65 },
+			position = { x = 0.5, y = 0.35 },
 			alignment = { x = 0, y = 0 },
 			offset = { x = -160, y = 0 },
 			size = { x = 16, y = 16 },
@@ -95,7 +95,7 @@ y_bows.hud_foreground = futil.define_hud("y_bows:foreground", {
 					text = "[combine:16x16^[noalpha^[colorize:#00ff00:255",
 					number = math.round(40 * (elapsed / draw_time)),
 					direction = 0, -- left to right
-					position = { x = 0.5, y = 0.65 },
+					position = { x = 0.5, y = 0.35 },
 					alignment = { x = 0, y = 0 },
 					offset = { x = -160, y = 0 },
 					size = { x = 16, y = 16 },
@@ -108,7 +108,7 @@ y_bows.hud_foreground = futil.define_hud("y_bows:foreground", {
 			text = "[combine:16x16^[noalpha^[colorize:#00ff00:255",
 			number = 0,
 			direction = 0, -- left to right
-			position = { x = 0.5, y = 0.65 },
+			position = { x = 0.5, y = 0.35 },
 			alignment = { x = 0, y = 0 },
 			offset = { x = -160, y = 0 },
 			size = { x = 16, y = 16 },
