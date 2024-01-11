@@ -22,6 +22,7 @@ function y_bows.register_projectile(name, projectile_group, def)
 		short_description = def.description,
 		inventory_image = def.inventory_image,
 		groups = { [projectile_group] = 1 },
+		light_source = def.light_source,
 		_y_bows_parameters = parameters,
 		_y_bows_properties = def.properties,
 	})

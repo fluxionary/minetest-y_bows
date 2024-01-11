@@ -51,6 +51,7 @@ y_bows.register_arrow("y_bows:arrow_fire", {
 	description = S("fire arrow"),
 	inventory_image = "y_bows_arrow_fire.png",
 	recipe = diagonal(ci.torch, ci.oil, ci.feather),
+	light_source = minetest.LIGHT_MAX,
 	parameters = {
 		drag = {
 			coefficient = 0.2,
