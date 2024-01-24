@@ -3,6 +3,7 @@ local f = string.format
 local S = y_bows.S
 
 y_bows.hud_icon = futil.define_hud("y_bows:icon", {
+	period = 1,
 	enabled_by_default = true,
 	get_hud_def = function(player, data)
 		local wielded_item = player:get_wielded_item()
@@ -41,6 +42,7 @@ y_bows.hud_icon = futil.define_hud("y_bows:icon", {
 })
 
 y_bows.hud_background = futil.define_hud("y_bows:background", {
+	period = 1,
 	enabled_by_default = true,
 	get_hud_def = function(player, data)
 		local wielded_item = player:get_wielded_item()
@@ -78,6 +80,7 @@ y_bows.hud_background = futil.define_hud("y_bows:background", {
 })
 
 y_bows.hud_foreground = futil.define_hud("y_bows:foreground", {
+	period = 0.1,
 	enabled_by_default = true,
 	get_hud_def = function(player, data)
 		local wielded_item = player:get_wielded_item()
