@@ -3,6 +3,8 @@ local f = string.format
 local S = y_bows.S
 local ci = y_bows.resources.craftitems
 
+local damage_multiplier = y_bows.settings.damage_multiplier
+
 function y_bows.register_arrow(name, def)
 	y_bows.register_projectile(name, "y_bows_arrow", def)
 end
@@ -25,7 +27,7 @@ y_bows.register_arrow("y_bows:arrow_bronze", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 12 },
+				damage_groups = { fleshy = 6 * damage_multiplier },
 			},
 		},
 	},
@@ -41,7 +43,7 @@ y_bows.register_arrow("y_bows:arrow_diamond", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 16 },
+				damage_groups = { fleshy = 8 * damage_multiplier },
 			},
 		},
 	},
@@ -58,7 +60,7 @@ y_bows.register_arrow("y_bows:arrow_fire", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fire = 6 },
+				damage_groups = { fire = 3 * damage_multiplier },
 			},
 		},
 		replace = {
@@ -77,7 +79,7 @@ y_bows.register_arrow("y_bows:arrow_mese", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 14 },
+				damage_groups = { fleshy = 7 * damage_multiplier },
 			},
 		},
 	},
@@ -93,7 +95,7 @@ y_bows.register_arrow("y_bows:arrow_steel", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 12 },
+				damage_groups = { fleshy = 6 * damage_multiplier },
 			},
 		},
 	},
@@ -109,7 +111,7 @@ y_bows.register_arrow("y_bows:arrow_stone", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 8 },
+				damage_groups = { fleshy = 4 * damage_multiplier },
 			},
 		},
 	},
@@ -125,7 +127,7 @@ y_bows.register_arrow("y_bows:arrow_wood", {
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 4 },
+				damage_groups = { fleshy = 2 * damage_multiplier },
 			},
 		},
 	},
