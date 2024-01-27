@@ -50,8 +50,13 @@ minetest.register_globalstep(function(dtime)
 			meta:set_float("y_bows:drawing_elapsed", elapsed)
 			meta:set_string("y_bows:drawing_name", wielded_item:get_name())
 			if prev_elapsed < wielded_def._y_bows_draw_time and elapsed == wielded_def._y_bows_draw_time then
-				minetest.sound_play({ name = "y_bows_bow_load" }, { to_player = player:get_player_name() })
+				minetest.sound_play({ name = "y_bows_bow_loaded" }, { to_player = player:get_player_name() })
 			end
+		elseif wielding_bow_weapon then
+			meta:set_float("y_bows:drawing_elapsed", 0)
+			meta:set_string("y_bows:drawing_name", wielded_item:get_name())
+
+			minetest.sound_play({ name = "y_bows_bow_load" }, { to_player = player:get_player_name() })
 		else
 			meta:set_string("y_bows:drawing_elapsed", "")
 			meta:set_string("y_bows:drawing_name", "")
