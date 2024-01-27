@@ -55,29 +55,29 @@ function y_bows.util.find_in_inv(player, group)
 	end
 end
 
-function y_bows.util.bullseye_was_hit(entity, pos, node, axis, old_velocity, new_velocity)
+function y_bows.util.bullseye_was_hit(
+	entity,
+	node_pos,
+	node,
+	above_pos,
+	intersection_point,
+	intersection_normal,
+	box_id
+)
 	if node.name == "y_bows:target" and minetest.is_player(entity._source_obj) then
-		-- check for a bullseye hit
-		local pos_at_collision = ballistics.estimate_collision_position(
-			entity._last_pos,
-			entity._last_velocity,
-			entity.object:get_pos(),
-			new_velocity
-		)
-		local ray = Raycast(pos_at_collision, pos_at_collision + old_velocity:normalize(), false)
-		local hit_position
-		for pointed_thing in ray do
-			if minetest.get_node(pointed_thing.under).name == "y_bows:target" then
-				hit_position = pointed_thing.intersection_point - pos
-				break
-			end
+		local hit_position = vector.copy(intersection_point)
+		local axis
+		if intersection_normal.x ~= 0 then
+			axis = "x"
+		elseif intersection_normal.y ~= 0 then
+			axis = "y"
+		else
+			axis = "z"
 		end
-		if hit_position then
-			hit_position[axis] = 0
-			if hit_position:length() <= 0.125 then
-				-- hit!
-				return true
-			end
+		hit_position[axis] = 0
+		if hit_position:length() <= 0.125 then
+			-- hit!
+			return true
 		end
 	end
 
