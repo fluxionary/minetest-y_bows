@@ -146,6 +146,7 @@ end
 
 y_bows.register_projectile("y_bows:arrow", {
 	is_arrow = true,
+	update_period = 0.25,
 	visual = "mesh",
 	mesh = "y_bows_arrow.b3d",
 	textures = { "y_bows_arrow_mesh.png" },
