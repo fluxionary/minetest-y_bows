@@ -161,5 +161,10 @@ for i = 1, #default_dyes do
 			--colors = {dye},  -- this doesn't work for unknown reasons
 			textures = { f("y_bows_arrow_mesh.png^[colorize:%s:128", dye) },
 		},
+		parameters = {
+			drag = {
+				coefficient = 0.2,
+			},
+		},
 	})
 end
