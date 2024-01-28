@@ -90,10 +90,6 @@ local base_def = {
 			ballistics.on_hit_object_hit_sound_play(self, object, ...)
 		end
 
-		if self._parameters.replace then
-			ballistics.on_hit_object_replace(self, object, ...)
-		end
-
 		if self._parameters.punch then
 			ballistics.on_hit_object_punch(self, object, ...)
 		end
@@ -112,6 +108,10 @@ local base_def = {
 			if entity._parameters.drop_item then
 				ballistics.on_hit_object_drop_item(entity)
 			end
+		end
+
+		if self._parameters.replace then
+			ballistics.on_hit_object_replace(self, object, ...)
 		end
 
 		-- TODO: when i get the "attach to entity" thing working, do that here
