@@ -32,7 +32,7 @@ function y_bows.register_weapon(name, projectile_group, projectile_entity, def)
 			end
 			if not minetest.is_creative_enabled(user:get_player_name()) then
 				if def.uses then
-					itemstack:set_wear(minetest.get_tool_wear_after_use(def.uses, itemstack:get_wear()))
+					itemstack:add_wear(minetest.get_tool_wear_after_use(def.uses, itemstack:get_wear()))
 				end
 				local inv = user:get_inventory()
 				projectile:take_item()
