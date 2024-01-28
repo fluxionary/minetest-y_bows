@@ -8,11 +8,15 @@ function y_bows.shoot(entity_name, shooter, weapon, projectile)
 	if minetest.get_item_group(projectile:get_name(), weapon_def._y_bows_projectile_group) == 0 then
 		return
 	end
+	local shooter_meta = shooter:get_meta()
+	local drawing_elapsed = shooter_meta:get_float("y_bows:drawing_elapsed")
+	if drawing_elapsed < s.min_time_between_shoots then
+		return
+	end
+
 	local base_speed = weapon_def._y_bows_base_speed
 	local crit_chance = weapon_def._y_bows_crit_chance
 	local draw_time = weapon_def._y_bows_draw_time
-	local shooter_meta = shooter:get_meta()
-	local drawing_elapsed = shooter_meta:get_float("y_bows:drawing_elapsed")
 	local speed = base_speed * math.min(drawing_elapsed, draw_time) / draw_time
 	local projectile_def = projectile:get_definition()
 	local parameters = table.copy(projectile_def._y_bows_parameters)
@@ -30,7 +34,7 @@ function y_bows.shoot(entity_name, shooter, weapon, projectile)
 			-- TODO: change particles and sounds?
 		end
 	end
-	shooter_meta:set_string("y_bows:drawing_elapsed", "")
+	shooter_meta:set_float("y_bows:drawing_elapsed", 0)
 	local obj =
 		ballistics.player_shoots(entity_name, shooter, speed, nil, parameters, projectile_def._y_bows_properties)
 	if obj then
