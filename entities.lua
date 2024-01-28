@@ -58,17 +58,16 @@ local base_def = {
 		end
 	end,
 
-	on_hit_node = function(self, node_pos, node, axis, old_velocity, new_velocity)
-		ballistics.on_hit_node_freeze(self, node_pos, node, axis, old_velocity, new_velocity)
-		ballistics.on_hit_node_active_sound_stop(self, node_pos, node, axis, old_velocity, new_velocity)
-		ballistics.on_hit_node_hit_sound_play(self, node_pos, node, axis, old_velocity, new_velocity)
-		ballistics.on_hit_node_become_non_physical(self, node_pos, node, axis, old_velocity, new_velocity)
+	on_hit_node = function(self, node_pos, node, ...)
+		ballistics.on_hit_node_freeze(self, node_pos, node, ...)
+		ballistics.on_hit_node_active_sound_stop(self, node_pos, node, ...)
+		ballistics.on_hit_node_hit_sound_play(self, node_pos, node, ...)
 
 		if self._parameters.replace then
-			ballistics.on_hit_node_replace(self, node_pos, node, axis, old_velocity, new_velocity)
+			ballistics.on_hit_node_replace(self, node_pos, node, ...)
 		end
 
-		if y_bows.util.bullseye_was_hit(self, node_pos, node, axis, old_velocity, new_velocity) then
+		if y_bows.util.bullseye_was_hit(self, node_pos, node, ...) then
 			y_bows.on_bullseye_hit(node_pos, self._source_obj)
 		end
 
@@ -79,7 +78,7 @@ local base_def = {
 		return true
 	end,
 
-	on_hit_object = function(self, object, axis, old_velocity, new_velocity)
+	on_hit_object = function(self, object, ...)
 		local hit_a_projectile = false
 		local entity = object:get_luaentity()
 		if entity and registered_projectiles[entity.name] then
@@ -88,23 +87,21 @@ local base_def = {
 
 		ballistics.on_hit_object_active_sound_stop(self)
 		if not hit_a_projectile then
-			ballistics.on_hit_object_hit_sound_play(self, object, axis, old_velocity, new_velocity)
+			ballistics.on_hit_object_hit_sound_play(self, object, ...)
 		end
 
 		if self._parameters.replace then
-			ballistics.on_hit_object_replace(self, object, axis, old_velocity, new_velocity)
+			ballistics.on_hit_object_replace(self, object, ...)
 		end
 
 		if self._parameters.punch then
-			ballistics.on_hit_object_punch(self, object, axis, old_velocity, new_velocity)
+			ballistics.on_hit_object_punch(self, object, ...)
 		end
 
 		local source = self._source_obj
 		if minetest.is_player(source) and not hit_a_projectile then
 			minetest.sound_play({ name = "y_bows_arrow_successful_hit" }, { to_player = source:get_player_name() })
 		end
-
-		ballistics.on_hit_object_become_non_physical(self, object, axis, old_velocity, new_velocity)
 
 		if self._parameters.remove_object then
 			self.object:remove()

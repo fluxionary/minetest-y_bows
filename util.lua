@@ -65,7 +65,7 @@ function y_bows.util.bullseye_was_hit(
 	box_id
 )
 	if node.name == "y_bows:target" and minetest.is_player(entity._source_obj) then
-		local hit_position = vector.copy(intersection_point)
+		local hit_position = node_pos - intersection_point
 		local axis
 		if intersection_normal.x ~= 0 then
 			axis = "x"
