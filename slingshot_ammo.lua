@@ -13,11 +13,11 @@ y_bows.register_slingshot_ammo("y_bows:ball_rock", {
 	recipe = { { ci.cobble }, { ci.cobble } },
 	parameters = {
 		drag = {
-			coefficient = 0.3,
+			coefficient = 0.4,
 		},
 		punch = {
 			tool_capabilities = {
-				damage_groups = { fleshy = 3 * damage_multiplier },
+				damage_groups = { fleshy = 2 * damage_multiplier },
 			},
 		},
 	},
