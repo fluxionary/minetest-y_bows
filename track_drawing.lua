@@ -46,6 +46,9 @@ minetest.register_globalstep(function(dtime)
 			and projectile == previous_projectile
 		then
 			local prev_elapsed = meta:get_float("y_bows:drawing_elapsed")
+			if prev_elapsed == 0 then
+				minetest.sound_play({ name = "y_bows_bow_load" }, { to_player = player:get_player_name() })
+			end
 			local elapsed = math.min(prev_elapsed + dtime, wielded_def._y_bows_draw_time)
 			meta:set_float("y_bows:drawing_elapsed", elapsed)
 			meta:set_string("y_bows:drawing_name", wielded_item:get_name())
