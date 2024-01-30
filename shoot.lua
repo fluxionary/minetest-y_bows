@@ -9,14 +9,14 @@ function y_bows.shoot(entity_name, shooter, weapon, projectile)
 		return
 	end
 	local shooter_meta = shooter:get_meta()
+	local draw_time = weapon_def._y_bows_draw_time
 	local drawing_elapsed = shooter_meta:get_float("y_bows:drawing_elapsed")
-	if drawing_elapsed < s.min_time_between_shoots then
+	if drawing_elapsed < draw_time / 2 then
 		return
 	end
 
 	local base_speed = weapon_def._y_bows_base_speed
 	local crit_chance = weapon_def._y_bows_crit_chance
-	local draw_time = weapon_def._y_bows_draw_time
 	local speed = base_speed * math.min(drawing_elapsed, draw_time) / draw_time
 	local projectile_def = projectile:get_definition()
 	local parameters = table.copy(projectile_def._y_bows_parameters)

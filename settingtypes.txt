@@ -8,6 +8,3 @@ y_bows:base_speed (base projectile speed) float 30 0.1
 
 # set to scale all projectile damage by a fixed amount
 y_bows:damage_multiplier (damage multiplier) float 2 0
-
-# minimum time to wait between shooting projectiles.
-y_bows:min_time_between_shoots (shoot cooldown) float 0.25 0
