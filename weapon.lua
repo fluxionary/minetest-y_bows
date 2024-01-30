@@ -8,8 +8,8 @@ function y_bows.register_weapon(name, projectile_group, projectile_entity, def)
 			"%s\n%s\n%s\n%s",
 			def.description,
 			minetest.colorize("green", S("crit chance: @1%", def.crit_chance)),
-			minetest.colorize("cyan", S("base speed: @1", def.base_speed)),
-			minetest.colorize("red", S("draw time: @1", def.draw_time))
+			minetest.colorize("cyan", S("base speed: @1 n/s", def.base_speed)),
+			minetest.colorize("red", S("draw time: @1s", def.draw_time))
 		),
 		short_description = def.description,
 		inventory_image = def.inventory_image,
