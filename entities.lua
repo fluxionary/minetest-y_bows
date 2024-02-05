@@ -59,7 +59,7 @@ local base_def = {
 	end,
 
 	on_hit_node = function(self, node_pos, node, ...)
-		ballistics.on_hit_node_freeze(self, node_pos, node, ...)
+		ballistics.on_hit_node_attach(self, node_pos, node, ...)
 		ballistics.on_hit_node_active_sound_stop(self, node_pos, node, ...)
 		ballistics.on_hit_node_hit_sound_play(self, node_pos, node, ...)
 
