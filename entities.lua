@@ -102,11 +102,11 @@ local base_def = {
 		if self._parameters.remove_object then
 			self.object:remove()
 		elseif hit_a_projectile then
-			if self._parameters.drop_item then
-				ballistics.on_hit_object_drop_item(self)
+			if self._parameters.add_item then
+				ballistics.on_hit_object_add_item(self)
 			end
-			if entity._parameters.drop_item then
-				ballistics.on_hit_object_drop_item(entity)
+			if entity._parameters.add_item then
+				ballistics.on_hit_object_add_item(entity)
 			end
 		end
 
@@ -125,8 +125,8 @@ local base_def = {
 			if ballistics.on_punch_pickup_item(self, puncher, time_from_last_punch, tool_capabilities, dir, damage) then
 				return
 			end
-		elseif self._parameters.drop_item then
-			if ballistics.on_punch_drop_item(self, puncher, time_from_last_punch, tool_capabilities, dir, damage) then
+		elseif self._parameters.add_item then
+			if ballistics.on_punch_add_item(self, puncher, time_from_last_punch, tool_capabilities, dir, damage) then
 				return
 			end
 		end
