@@ -6,7 +6,7 @@ local ci = y_bows.resources.craftitems
 local damage_multiplier = y_bows.settings.damage_multiplier
 
 function y_bows.register_arrow(name, def)
-	y_bows.register_projectile(name, "y_bows_arrow", def)
+	y_bows.register_ammo(name, "y_bows_arrow", def)
 end
 
 local function diagonal(a, b, c)
