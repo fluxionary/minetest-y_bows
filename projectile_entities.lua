@@ -41,6 +41,7 @@ local base_def = {
 				name = "y_bows_arrow_hit",
 			},
 		},
+		time_to_live = y_bows.settings.time_to_live,
 	},
 
 	on_activate = function(self, ...)
@@ -52,6 +53,9 @@ local base_def = {
 	end,
 
 	on_step = function(self, ...)
+		if ballistics.on_step_check_time_to_live(self, ...) then
+			return true
+		end
 		ballistics.on_step_particles(self, ...)
 		if self._parameters.drag then
 			ballistics.on_step_apply_drag(self, ...)

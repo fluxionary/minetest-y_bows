@@ -8,3 +8,7 @@ y_bows:base_speed (base projectile speed) float 30 0.1
 
 # set to scale all projectile damage by a fixed amount
 y_bows:damage_multiplier (damage multiplier) float 2 0
+
+# projectiles will disappear after this many seconds. negative values mean they won't expire on a timer, only when
+# they are unloaded.
+y_bows:time_to_live (projectile time to live) float 900 -1
