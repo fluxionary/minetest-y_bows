@@ -34,7 +34,7 @@ note: SaKeL is the author of x_bows.
     * y_bows_target.png
   * CC BY-SA 4.0, AliasAlreadyTaken
     * y_bows_bow_steel.png (modified from y_bows_bow_wood.png)
-  * StyxColor, TODO: get license info from alias
+  * StyxColor, CC0
     * y_bows_ball_rock.png
     * y_bows_slingshot_steel.png
     * y_bows_slingshot_wood.png
