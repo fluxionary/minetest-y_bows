@@ -1,3 +1,4 @@
+futil.check_version({ year = 2024, month = 3, day = 26 }, "get_hp")
 ballistics.check_version({ year = 2024, month = 1, day = 10 })
 
 y_bows = fmod.create()

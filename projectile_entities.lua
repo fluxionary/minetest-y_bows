@@ -1,4 +1,4 @@
-local registered_projectiles = {}
+y_bows.registered_projectiles = {}
 
 local base_def = {
 	immortal = true,
@@ -83,35 +83,29 @@ local base_def = {
 	end,
 
 	on_hit_object = function(self, object, ...)
-		local hit_a_projectile = false
-		local entity = object:get_luaentity()
-		if entity and registered_projectiles[entity.name] then
-			hit_a_projectile = true
-		end
-
 		ballistics.on_hit_object_active_sound_stop(self)
-		if not hit_a_projectile then
-			ballistics.on_hit_object_hit_sound_play(self, object, ...)
-		end
+		ballistics.on_hit_object_hit_sound_play(self, object, ...)
 
+		local hp_before_hit = futil.get_hp(object)
 		if self._parameters.punch then
 			ballistics.on_hit_object_punch(self, object, ...)
 		end
+		local hp_after_hit = futil.get_hp(object)
+		local was_damaged = hp_before_hit > hp_after_hit
 
 		local source = self._source_obj
-		if minetest.is_player(source) and not hit_a_projectile then
-			minetest.sound_play({ name = "y_bows_arrow_successful_hit" }, { to_player = source:get_player_name() })
+		if futil.is_player(source) then
+			local sound_name
+			if was_damaged then
+				sound_name = "y_bows_arrow_successful_hit"
+			else
+				sound_name = "y_bows_arrow_failed_hit"
+			end
+			minetest.sound_play({ name = sound_name }, { to_player = source:get_player_name() })
 		end
 
 		if self._parameters.remove_object then
 			self.object:remove()
-		elseif hit_a_projectile then
-			if self._parameters.add_item then
-				ballistics.on_hit_object_add_item(self)
-			end
-			if entity._parameters.add_item then
-				ballistics.on_hit_object_add_item(entity)
-			end
 		end
 
 		if self._parameters.replace then
@@ -142,7 +136,7 @@ function y_bows.register_projectile(name, overrides)
 	local def = table.copy(base_def)
 	futil.table.set_all(def, overrides)
 	ballistics.register_projectile(name, def)
-	registered_projectiles[name] = true
+	y_bows.registered_projectiles[name] = true
 end
 
 y_bows.register_projectile("y_bows:arrow", {

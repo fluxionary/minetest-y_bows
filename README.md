@@ -50,6 +50,7 @@ note: SaKeL is the author of x_bows.
     * y_bows_arrow_hit.5.ogg
   * CC BY 4.0, Natty23, https://freesound.org/people/Natty23/sounds/411749/
     * y_bows_arrow_successful_hit.ogg
+    * y_bows_arrow_failed_hit.ogg (modified by whosit)
   * CC BY 3.0, brendan89, https://freesound.org/people/brendan89/
     * y_bows_shoot.1.ogg
   * CC0, krishnamohan, https://freesound.org/people/krishnamohan/sounds/486971/
